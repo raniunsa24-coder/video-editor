@@ -37,9 +37,6 @@ const API_URL =
 
 const SERVER_URL = API_URL.replace(/\/api$/, "");
 
-// =====================================================
-// PROTECTED ROUTE
-// =====================================================
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
@@ -50,10 +47,6 @@ function ProtectedRoute({ children }) {
 
   return children;
 }
-
-// =====================================================
-// NAVBAR
-// =====================================================
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -116,9 +109,7 @@ function Navbar() {
   );
 }
 
-// =====================================================
-// HOME
-// =====================================================
+
 
 function Home() {
   const { user } = useAuth();
@@ -276,9 +267,7 @@ function Home() {
   );
 }
 
-// =====================================================
-// LOGIN PAGE
-// =====================================================
+
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -291,9 +280,6 @@ function LoginPage() {
   );
 }
 
-// =====================================================
-// REGISTER PAGE
-// =====================================================
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -306,16 +292,12 @@ function RegisterPage() {
   );
 }
 
-// =====================================================
-// DASHBOARD PAGE
-// =====================================================
+
 
 function DashboardPage() {
   const navigate = useNavigate();
 
-  // ---------------------------------------------------
-  // Upload video
-  // ---------------------------------------------------
+ 
 
   const handleUpload = async (file) => {
     try {
@@ -368,9 +350,7 @@ function DashboardPage() {
         );
       }
 
-      // -------------------------------------------------
-      // Create MongoDB project automatically
-      // -------------------------------------------------
+    
 
       const projectTitle =
         file.name.replace(/\.[^/.]+$/, "");
@@ -431,9 +411,7 @@ function DashboardPage() {
         );
       }
 
-      // -------------------------------------------------
-      // Open editor with uploaded project
-      // -------------------------------------------------
+      
 
       navigate("/editor", {
         state: {
@@ -460,10 +438,7 @@ function DashboardPage() {
     }
   };
 
-  // ---------------------------------------------------
-  // Create empty project
-  // ---------------------------------------------------
-
+ 
   const handleCreate = () => {
     navigate("/editor", {
       state: {
@@ -474,10 +449,7 @@ function DashboardPage() {
     });
   };
 
-  // ---------------------------------------------------
-  // Open saved project
-  // ---------------------------------------------------
-
+  
   const handleOpenProject = (
     project
   ) => {
@@ -520,9 +492,7 @@ function DashboardPage() {
   );
 }
 
-// =====================================================
-// EDITOR PAGE
-// =====================================================
+
 
 function EditorPage() {
   const navigate = useNavigate();
@@ -536,9 +506,7 @@ function EditorPage() {
   );
 }
 
-// =====================================================
-// APP ROUTES
-// =====================================================
+
 
 function AppRoutes() {
   return (
@@ -598,10 +566,6 @@ function AppRoutes() {
     </>
   );
 }
-
-// =====================================================
-// APP
-// =====================================================
 
 function App() {
   return (

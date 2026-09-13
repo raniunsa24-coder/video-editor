@@ -7,9 +7,6 @@ const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// =====================================================
-// UPLOAD DIRECTORY
-// =====================================================
 
 const uploadDir = path.join(__dirname, "..", "uploads");
 
@@ -19,9 +16,7 @@ if (!fs.existsSync(uploadDir)) {
   });
 }
 
-// =====================================================
-// MULTER STORAGE
-// =====================================================
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -41,9 +36,7 @@ const storage = multer.diskStorage({
   },
 });
 
-// =====================================================
-// FILE FILTER
-// =====================================================
+
 
 const fileFilter = (req, file, cb) => {
   const allowedExtensions = [
@@ -75,9 +68,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// =====================================================
-// MULTER CONFIG
-// =====================================================
+
 
 const upload = multer({
   storage,
@@ -88,9 +79,7 @@ const upload = multer({
   },
 });
 
-// =====================================================
-// HELPER: DELETE OLD VIDEO
-// =====================================================
+
 
 const deleteOldVideo = (oldVideoUrl) => {
   try {
@@ -98,14 +87,12 @@ const deleteOldVideo = (oldVideoUrl) => {
       return;
     }
 
-    // Example:
-    // /uploads/123456-video.mp4
 
     const filename = path.basename(
       oldVideoUrl
     );
 
-    // Protect against invalid file names
+  
     if (!filename || filename === ".") {
       return;
     }
@@ -131,9 +118,7 @@ const deleteOldVideo = (oldVideoUrl) => {
   }
 };
 
-// =====================================================
-// UPLOAD VIDEO
-// =====================================================
+
 
 router.post(
   "/upload",
@@ -148,13 +133,11 @@ router.post(
         });
       }
 
-      // Optional old video URL.
-      // This is used when replacing an existing video.
+     
       const oldVideoUrl =
         req.body?.oldVideoUrl || "";
 
-      // Delete old video only after
-      // the new video has uploaded successfully.
+      
       if (oldVideoUrl) {
         deleteOldVideo(oldVideoUrl);
       }
@@ -204,9 +187,6 @@ router.post(
   }
 );
 
-// =====================================================
-// DELETE A VIDEO FILE
-// =====================================================
 
 router.delete(
   "/:filename",
@@ -258,9 +238,7 @@ router.delete(
   }
 );
 
-// =====================================================
-// MULTER ERROR HANDLER
-// =====================================================
+
 
 router.use(
   (error, req, res, next) => {

@@ -7,9 +7,7 @@ const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// =========================
-// CREATE PROJECT
-// =========================
+
 router.post("/", protect, async (req, res) => {
   try {
     const {
@@ -53,9 +51,7 @@ router.post("/", protect, async (req, res) => {
   }
 });
 
-// =========================
-// GET MY PROJECTS
-// =========================
+
 router.get("/", protect, async (req, res) => {
   try {
     const projects = await Project.find({
@@ -76,9 +72,7 @@ router.get("/", protect, async (req, res) => {
   }
 });
 
-// =========================
-// GET SINGLE PROJECT
-// =========================
+
 router.get("/:id", protect, async (req, res) => {
   try {
     const project = await Project.findOne({
@@ -107,9 +101,7 @@ router.get("/:id", protect, async (req, res) => {
   }
 });
 
-// =========================
-// UPDATE PROJECT
-// =========================
+
 router.put("/:id", protect, async (req, res) => {
   try {
     const {
@@ -174,9 +166,7 @@ router.put("/:id", protect, async (req, res) => {
   }
 });
 
-// =========================
-// DELETE PROJECT + VIDEO
-// =========================
+
 router.delete("/:id", protect, async (req, res) => {
   try {
     const project = await Project.findOne({
@@ -191,12 +181,12 @@ router.delete("/:id", protect, async (req, res) => {
       });
     }
 
-    // Delete project from MongoDB
+  
     await Project.deleteOne({
       _id: project._id,
     });
 
-    // Delete uploaded video from uploads folder
+    
     if (project.videoUrl) {
       const filename = path.basename(project.videoUrl);
 

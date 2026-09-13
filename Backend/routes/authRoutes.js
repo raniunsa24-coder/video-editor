@@ -6,9 +6,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// =========================
-// REGISTER
-// =========================
+
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body || {};
@@ -60,9 +58,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// =========================
-// LOGIN
-// =========================
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -130,9 +126,7 @@ router.post("/login", async (req, res) => {
     });
   }
 });
-// =========================
-// GET CURRENT USER
-// =========================
+
 router.get("/me", protect, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select(
